@@ -11,7 +11,7 @@ export type ChestRarity = 'common' | 'rare' | 'legendary';
 export const CHEST_NAMES: Record<ChestRarity,string> = {common:'Обычный',rare:'Редкий',legendary:'Легендарный'};
 export interface CollectionDefinition { id:string; title:string; subtitle:string; art:string; partCount:number; dropWeight:number; rarity:ChestRarity; color:string }
 export const COLLECTIONS:CollectionDefinition[]=[
- {id:'glasshouse',title:'Оранжерея',subtitle:'Место, где всё начинается',art:'/art/greenhouse.svg',partCount:100,dropWeight:50,rarity:'common',color:'#8ce4c2'},
- {id:'lighthouse',title:'Маяк',subtitle:'Тихий свет на краю берега',art:'/art/lighthouse.svg',partCount:100,dropWeight:40,rarity:'rare',color:'#90c7ff'},
- {id:'townhouse',title:'Дом у парка',subtitle:'Маленький уголок большого города',art:'/art/townhouse.svg',partCount:100,dropWeight:10,rarity:'legendary',color:'#f0cd84'}
+ {id:'glasshouse',title:'Оранжерея',subtitle:'Место, где всё начинается',art:`${import.meta.env.BASE_URL}art/greenhouse.svg`,partCount:100,dropWeight:50,rarity:'common',color:'#8ce4c2'},
+ {id:'lighthouse',title:'Маяк',subtitle:'Тихий свет на краю берега',art:`${import.meta.env.BASE_URL}art/lighthouse.svg`,partCount:100,dropWeight:40,rarity:'rare',color:'#90c7ff'},
+ {id:'townhouse',title:'Дом у парка',subtitle:'Маленький уголок большого города',art:`${import.meta.env.BASE_URL}art/townhouse.svg`,partCount:100,dropWeight:10,rarity:'legendary',color:'#f0cd84'}
 ];

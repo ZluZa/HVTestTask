@@ -22,6 +22,16 @@ pnpm test:e2e      # при запущенном dev-сервере :4173; ну�
 
 Содержимое `dist/` публикуется на статическом HTTP-хостинге. `file://` для ES-модулей не подходит. Установка зависимостей требует сеть, сама игра — нет.
 
+### Публикация на GitHub Pages
+
+1. В репозитории открыть **Settings → Pages → Build and deployment → Source** и выбрать **GitHub Actions**.
+2. Закоммитить и отправить изменения в `main`. Workflow `.github/workflows/deploy.yml` установит зависимости, выполнит `pnpm check` и `pnpm build`, затем опубликует `dist/`.
+3. Дождаться успешного **Actions → Deploy to GitHub Pages**. Страница будет доступна по адресу https://zluza.github.io/HVTestTask/; точная ссылка также появится в результате deployment.
+
+Повторная публикация запускается при каждом push в `main`. Её можно запустить вручную через **Actions → Deploy to GitHub Pages → Run workflow**.
+
+Папку `dist/` коммитить не нужно: GitHub Actions создаёт её при сборке. Относительная база `./` в `vite.config.ts` и пути картинок через `import.meta.env.BASE_URL` позволяют размещать игру в подпапке репозитория. Основа настройки — [официальная инструкция Vite для GitHub Pages](https://vite.dev/guide/static-deploy.html#github-pages).
+
 ## Управление
 
 - Выбрать фигуру, затем нажать на клетку: это левый верхний угол её ограничивающего прямоугольника.
