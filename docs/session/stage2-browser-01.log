@@ -1,0 +1,15 @@
+$ playwright test
+
+Running 7 tests using 1 worker
+
+(node:40824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/game.spec.ts:3:1 › desktop: select, preview, clear, invalid placement, drag, themes and rules (3.3s)
+  ✓  2 tests/browser/game.spec.ts:11:1 › mobile touch: tap placement and drag, no overflow, three collection cards (2.3s)
+  ✓  3 tests/browser/game.spec.ts:16:1 › 320px and reduced motion (637ms)
+  ✓  4 tests/browser/game.spec.ts:17:1 › continues past 18 placements without a result dialog or field title (4.5s)
+  ✓  5 tests/browser/game.spec.ts:23:1 › no legal remaining pieces opens the blocked result (1.4s)
+  ✓  6 tests/browser/game.spec.ts:41:1 › invalid hover draws nothing; valid hover remains visible (635ms)
+  ✓  7 tests/browser/game.spec.ts:47:1 › clear wave visibly starts at last placement and reaches the far edge later (813ms)
+
+  7 passed (14.9s)

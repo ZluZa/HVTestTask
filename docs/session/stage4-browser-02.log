@@ -1,0 +1,108 @@
+$ playwright test tests/browser/chests.spec.ts tests/browser/economy.spec.ts tests/browser/game.spec.ts
+
+Running 22 tests using 1 worker
+
+(node:43350) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/chests.spec.ts:13:2 › glasshouse chest opens once, unlocks sand, equips and persists (1.9s)
+  ✓   2 tests/browser/chests.spec.ts:13:2 › lighthouse chest opens once, unlocks ocean, equips and persists (1.6s)
+  ✓   3 tests/browser/chests.spec.ts:13:2 › townhouse chest opens once, unlocks aurora, equips and persists (1.4s)
+  ✓   4 tests/browser/chests.spec.ts:21:1 › duplicate grants 25 parts only to opened collection and does not create another unlock (1.3s)
+  ✓   5 tests/browser/chests.spec.ts:24:1 › reloading during opening keeps the transaction (520ms)
+  ✓   6 tests/browser/chests.spec.ts:27:1 › mobile six-skin grid and chest reveal fit narrow screen with reduced motion (635ms)
+  ✓   7 tests/browser/economy.spec.ts:20:1 › fresh collection has three closed pictures, zero balances, distinct chests and 50/40/10 labels (574ms)
+  ✓   8 tests/browser/economy.spec.ts:28:2 › one line awards only glasshouse and flies into its destination (1.6s)
+  ✓   9 tests/browser/economy.spec.ts:28:2 › one line awards only lighthouse and flies into its destination (1.6s)
+  ✓  10 tests/browser/economy.spec.ts:28:2 › one line awards only townhouse and flies into its destination (1.6s)
+  ✓  11 tests/browser/economy.spec.ts:36:1 › combo rewards remain correct when reward flights overlap and persist after reload (2.5s)
+  ✓  12 tests/browser/economy.spec.ts:41:1 › 100 reveals the picture, pays for a chest and keeps assembled art visible afterwards (2.8s)
+  ✓  13 tests/browser/economy.spec.ts:47:1 › partial masks show progress, legendary chest becomes ready, and excess stays in reserve (1.6s)
+  ✓  14 tests/browser/economy.spec.ts:54:1 › mobile offscreen destination receives a visible thumbnail without scrolling the board (1.9s)
+  ✓  15 tests/browser/economy.spec.ts:59:1 › reduced motion credits immediately without flying tokens; malformed save remains playable (453ms)
+  ✓  16 tests/browser/game.spec.ts:4:1 › desktop: select, preview, clear, invalid placement, drag, themes and rules (2.7s)
+  ✓  17 tests/browser/game.spec.ts:12:1 › mobile touch: tap placement and drag, no overflow, three collection cards (2.2s)
+  ✓  18 tests/browser/game.spec.ts:17:1 › 320px and reduced motion (467ms)
+  ✘  19 tests/browser/game.spec.ts:18:1 › continues past 18 placements without a result dialog or field title (9.0s)
+(node:43495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 tests/browser/game.spec.ts:24:1 › no legal remaining pieces opens the blocked result (30.2s)
+(node:43524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  21 tests/browser/game.spec.ts:42:1 › invalid hover draws nothing; valid hover remains visible (899ms)
+  ✓  22 tests/browser/game.spec.ts:48:1 › clear wave visibly starts at last placement and reaches the far edge later (1.2s)
+
+
+  1) tests/browser/game.spec.ts:18:1 › continues past 18 placements without a result dialog or field title 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#moves')
+    Expected: "21"
+    Received: "5"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#moves') with timeout 5000ms
+      - waiting for locator('#moves')
+        14 × locator resolved to <b id="moves">5</b>
+           - unexpected value "5"
+
+
+      20 |  const moves:[number,number,number][]=[[0,6,2],[1,6,4],[2,7,5],...Array.from({length:18},(_,i)=>[i%3,i%8,Math.floor(i/8)] as [number,number,number])];
+      21 |  for(const[slot,x,y]of moves){await page.locator(`[data-slot="${slot}"]`).click();const p=await cell(page,x,y);await page.mouse.click(p.x,p.y);await page.waitForTimeout(140);}
+    > 22 |  await expect(page.locator('#moves')).toHaveText('21');await expect(page.locator('#result')).not.toBeVisible();await expect(page.locator('#board')).toHaveAttribute('data-status','playing');await expect(page.locator('#theme-title')).toHaveCount(0);await expect(page.locator('.piece-slot:disabled')).toHaveCount(0);
+         |                                       ^
+      23 | });
+      24 | test('no legal remaining pieces opens the blocked result',async({page})=>{
+      25 |  const {newGame,place,canPlace}=await import('../../src/core/game');
+        at /Users/b.konnov/Documents/GIT/HVTestTask/tests/browser/game.spec.ts:22:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-continues-past-18-pla-a5704-esult-dialog-or-field-title/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-continues-past-18-pla-a5704-esult-dialog-or-field-title/error-context.md
+
+  2) tests/browser/game.spec.ts:24:1 › no legal remaining pieces opens the blocked result ──────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('[data-slot="2"]')
+        - locator resolved to <button disabled data-slot="2" class="piece-slot" aria-pressed="false" aria-label="Фигура использована">…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        56 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      37 |  expect(route.length).toBeGreaterThan(0);
+      38 |  await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>{Math.random=()=>.999;});await page.goto('/');
+    > 39 |  for(const{slot,x,y}of route){await page.locator(`[data-slot="${slot}"]`).click();const p=await cell(page,x,y);await page.mouse.click(p.x,p.y);await page.waitForTimeout(140);}
+         |                                                                           ^
+      40 |  await expect(page.locator('#board')).toHaveAttribute('data-status','blocked');await expect(page.locator('#result')).toBeVisible();await expect(page.locator('#result-copy')).toContainText('нет места');await page.getByRole('button',{name:'Сыграть ещё'}).click();await expect(page.locator('#moves')).toHaveText('0');await expect(page.locator('#score')).toHaveText('0');
+      41 | });
+      42 | test('invalid hover draws nothing; valid hover remains visible',async({page})=>{
+        at /Users/b.konnov/Documents/GIT/HVTestTask/tests/browser/game.spec.ts:39:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-no-legal-remaining-pieces-opens-the-blocked-result/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-no-legal-remaining-pieces-opens-the-blocked-result/error-context.md
+
+  2 failed
+    tests/browser/game.spec.ts:18:1 › continues past 18 placements without a result dialog or field title 
+    tests/browser/game.spec.ts:24:1 › no legal remaining pieces opens the blocked result ───────────
+  20 passed (1.2m)
+[ELIFECYCLE] Command failed with exit code 1.

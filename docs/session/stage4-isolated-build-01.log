@@ -1,0 +1,14 @@
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 17 modules transformed.
+
+(!) outDir /tmp/blockbuild-stage4-dist is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../../../../tmp/blockbuild-stage4-dist/index.html                  0.61 kB │ gzip:  0.43 kB
+../../../../../tmp/blockbuild-stage4-dist/assets/index-BqU9M2Xd.css  19.36 kB │ gzip:  5.39 kB
+../../../../../tmp/blockbuild-stage4-dist/assets/index-BHfjkj0n.js   43.36 kB │ gzip: 15.71 kB
+
+✓ built in 136ms

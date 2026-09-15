@@ -1,0 +1,37 @@
+$ playwright test tests/browser/input-diagnostic.spec.ts
+
+Running 1 test using 1 worker
+
+(node:43712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"expected":1,"actual":"1","p":{"x":499.3125,"y":28.625},"target":"CANVAS","hint":"Линий: 1 · комбо ×1 · +110 очков · Частички: +1"}
+{"expected":2,"actual":"2","p":{"x":499.3125,"y":129.125},"target":"CANVAS","hint":"+10 очков. Продолжай в своём ритме."}
+{"expected":3,"actual":"3","p":{"x":549.5625,"y":179.375},"target":"CANVAS","hint":"Линий: 1 · комбо ×2 · +205 очков · Частички: +2"}
+{"expected":4,"actual":"3","p":{"x":197.8125,"y":-71.875},"hint":"Нажми на клетку для левого верхнего угла фигуры"}
+  ✘  1 tests/browser/input-diagnostic.spec.ts:2:1 › diagnose core placement coordinates (1.8s)
+
+
+  1) tests/browser/input-diagnostic.spec.ts:2:1 › diagnose core placement coordinates ──────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "4"
+    Received: "3"
+
+      4 |  const moves:[number,number,number][]=[[0,6,2],[1,6,4],[2,7,5],...Array.from({length:18},(_,i)=>[i%3,i%8,Math.floor(i/8)] as [number,number,number])];
+      5 |  let n=0;
+    > 6 |  for(const[slot,x,y]of moves){await page.locator(`[data-slot="${slot}"]`).click();const r=(await page.locator('#board').boundingBox())!;const p={x:r.x+(x+.5)*r.width/8,y:r.y+(y+.5)*r.height/8};const target=await page.evaluate(p=>document.elementFromPoint(p.x,p.y)?.tagName,p);await page.mouse.click(p.x,p.y);await page.waitForTimeout(140);const actual=await page.locator('#moves').textContent();console.log(JSON.stringify({expected:++n,actual,p,target,hint:await page.locator('#hint').textContent()}));expect(actual).toBe(String(n));}
+        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      7 | });
+      8 |
+        at /Users/b.konnov/Documents/GIT/HVTestTask/tests/browser/input-diagnostic.spec.ts:6:518
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/input-diagnostic-diagnose-core-placement-coordinates/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/input-diagnostic-diagnose-core-placement-coordinates/error-context.md
+
+  1 failed
+    tests/browser/input-diagnostic.spec.ts:2:1 › diagnose core placement coordinates ───────────────
+[ELIFECYCLE] Command failed with exit code 1.

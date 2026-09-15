@@ -1,0 +1,10 @@
+$ playwright test tests/browser/game.spec.ts -g 'continues past|no legal remaining'
+
+Running 2 tests using 1 worker
+
+(node:43892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/game.spec.ts:18:1 › continues past 18 placements without a result dialog or field title (5.5s)
+  ✓  2 tests/browser/game.spec.ts:24:1 › no legal remaining pieces opens the blocked result (1.5s)
+
+  2 passed (8.4s)

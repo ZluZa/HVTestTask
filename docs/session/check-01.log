@@ -1,0 +1,51 @@
+$ tsc --noEmit && vitest run
+
+ RUN  v5.0.0 /Users/b.konnov/Documents/GIT/HVTestTask
+
+ ❯ tests/game.test.ts (15 tests | 1 failed) 17ms
+   ❯ Block Build rules (15)
+     × catalog has all 35 unique normalized rotations 4ms
+ ❯ tests/browser/game.spec.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/browser/game.spec.ts [ tests/browser/game.spec.ts ]
+Error: Playwright Test did not expect test() to be called here.
+Most common reasons include:
+- You are calling test() in a configuration file.
+- You are calling test() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+- You are calling test() from an async test.describe() block. Only sync ones are supported.
+ ❯ _TestTypeImpl._currentSuite node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/common/index.js:2224:13
+ ❯ _TestTypeImpl._createTest node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/common/index.js:2238:24
+ ❯ node_modules/.pnpm/playwright@1.63.0/node_modules/playwright/lib/common/index.js:1154:12
+ ❯ tests/browser/game.spec.ts:3:1
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/game.test.ts > Block Build rules > catalog has all 35 unique normalized rotations
+AssertionError: expected [ { id: 'single-0', …(4) }, …(32) ] to have a length of 35 but got 33
+
+- Expected
++ Received
+
+- 35
++ 33
+
+ ❯ tests/game.test.ts:8:74
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  1 failed | 14 passed (15)
+   Start at  23:34:39
+   Duration  356ms (transform 50%, tests 28%, import 13%, worker 8%)
+
+[ELIFECYCLE] Command failed with exit code 1.

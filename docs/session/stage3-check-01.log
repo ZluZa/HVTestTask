@@ -1,0 +1,10 @@
+$ tsc --noEmit && vitest run
+
+ RUN  v5.0.0 /Users/b.konnov/Documents/GIT/HVTestTask
+
+
+ Test Files  3 passed (3)
+      Tests  28 passed (28)
+   Start at  23:57:37
+   Duration  190ms (transform 59%, import 18%, tests 16%, worker 7%)
+

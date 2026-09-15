@@ -1,0 +1,22 @@
+import { describe,it,expect } from 'vitest';
+import { newGame, emptyBoard, place, deal, fits, canPlace, findLines, preview, type GameState } from '../src/core/game';
+import { SHAPES, shapeById } from '../src/core/shapes';
+const single={shape:shapeById('single-0'),color:1};
+const clean=():GameState=>({...newGame(),board:emptyBoard(),hand:[single,single,single]});
+describe('Block Build rules',()=>{
+ it('starts with the exact Lotus board and hand',()=>{const s=newGame();expect(s.board.flat().filter(Boolean)).toHaveLength(12);for(let y=0;y<8;y++)for(let x=0;x<8;x++)expect(!!s.board[y][x]).toBe([2,5].includes(y)&&x<=5);expect(s.hand.map(p=>p?.shape.cells)).toEqual([[[0,0],[1,0]],[[0,0],[0,1]],[[0,0]]]);});
+ it('catalog has all 33 unique normalized rotations',()=>{expect(SHAPES).toHaveLength(33);expect(new Set(SHAPES.map(s=>JSON.stringify(s.cells))).size).toBe(33);for(const s of SHAPES){expect(Math.min(...s.cells.map(c=>c[0]))).toBe(0);expect(Math.min(...s.cells.map(c=>c[1]))).toBe(0);}});
+ it('rejects overlap, out of bounds and fractional coordinates without mutation',()=>{const s=newGame(),before=JSON.stringify(s);for(const[x,y]of [[0,2],[7,0],[-1,0],[1.5,0],[0,8]])expect(place(s,0,x,y)).toBeNull();expect(JSON.stringify(s)).toBe(before);});
+ it('clears the first Lotus row for 110 points',()=>{const r=place(newGame(),0,6,2)!;expect(r.points).toBe(110);expect(r.state.lines).toBe(1);expect(r.state.board[2].every(v=>v===0)).toBe(true);expect(r.state.moves).toBe(1);expect(r.multiplier).toBe(1);});
+ it('clears intersection once and counts both lines, squared score and all clear',()=>{const s=clean();for(let i=0;i<8;i++){s.board[3][i]=2;s.board[i][4]=3;}s.board[3][4]=0;const r=place(s,0,4,3)!;expect(r.clear.rows).toEqual([3]);expect(r.clear.columns).toEqual([4]);expect(r.clear.cells).toHaveLength(15);expect(r.state.lines).toBe(2);expect(r.points).toBe(705);expect(r.allClear).toBe(true);});
+ it('preview matches actual simultaneous clear without changing the board',()=>{const s=newGame(),before=JSON.stringify(s);const p=preview(s.board,s.hand[0]!,6,2);expect(p).toEqual(place(s,0,6,2)!.clear);expect(JSON.stringify(s)).toBe(before);expect(preview(s.board,s.hand[0]!,0,2)).toBeNull();});
+ it('keeps used slots empty until all three pieces are used',()=>{let s=clean();s=place(s,0,0,0)!.state;expect(s.hand[0]).toBeNull();s=place(s,1,1,0)!.state;expect(s.hand.filter(Boolean)).toHaveLength(1);s=place(s,2,2,0,()=>0)!.state;expect(s.hand.filter(Boolean)).toHaveLength(3);});
+ it('guarantees a fitting piece even when only a single gap exists',()=>{const b=Array.from({length:8},()=>Array(8).fill(1));b[7][7]=0;for(let i=0;i<50;i++){const h=deal(b);expect(h.some(p=>fits(b,p.shape))).toBe(true);}});
+ it('also deals on a full board without crashing',()=>{expect(deal(Array.from({length:8},()=>Array(8).fill(1)))).toHaveLength(3);});
+ it('increments combo on subsequent clears and preserves it for two misses',()=>{let s=clean();s.hasCombo=true;s.combo=2;for(let x=0;x<7;x++)s.board[0][x]=1;let r=place(s,0,7,0)!;expect(r.multiplier).toBe(3);expect(r.points).toBe(605);s=r.state;s.hand=[single,single,single];s=place(s,0,0,0)!.state;s=place(s,1,1,0)!.state;expect(s.combo).toBe(3);expect(s.hasCombo).toBe(true);s=place(s,2,2,0)!.state;expect(s.combo).toBe(1);expect(s.hasCombo).toBe(false);s.hand=[single,single,single];for(let x=0;x<7;x++)s.board[1][x]=1;expect(place(s,0,7,1)!.multiplier).toBe(1);});
+ it('continues beyond placement 18 and deals new hands',()=>{let s=clean();s.moves=17;s.hand=[single,null,null];s=place(s,0,0,0,()=>0)!.state;expect(s.moves).toBe(18);expect(s.status).toBe('playing');expect(s.hand.filter(Boolean)).toHaveLength(3);s=place(s,0,1,0)!.state;expect(s.moves).toBe(19);expect(s.status).toBe('playing');});
+ it('ends when all remaining pieces are blocked',()=>{const s=clean();s.board=Array.from({length:8},(_,y)=>Array.from({length:8},(_,x)=>(x+y)%2?1:0));s.hand=[single,{shape:shapeById('square2-0'),color:2},null];const r=place(s,0,0,0)!;expect(r.state.status).toBe('blocked');});
+ it('does not end when one remaining piece still fits',()=>{const s=clean();s.hand=[single,{shape:shapeById('square3-0'),color:2},single];expect(place(s,0,0,0)!.state.status).toBe('playing');});
+ it('placement points are five per cell',()=>{const s=clean();s.hand[0]={shape:shapeById('square3-0'),color:1};expect(place(s,0,2,2)!.points).toBe(45);});
+ it('never mutates source state during a successful placement',()=>{const s=newGame(),before=JSON.stringify(s);place(s,0,6,2);expect(JSON.stringify(s)).toBe(before);});
+});

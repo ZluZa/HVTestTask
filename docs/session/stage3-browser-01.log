@@ -1,0 +1,24 @@
+$ playwright test
+
+Running 16 tests using 1 worker
+
+(node:41666) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/economy.spec.ts:20:1 › fresh collection has three closed pictures, zero balances, distinct chests and 50/40/10 labels (1.8s)
+  ✓   2 tests/browser/economy.spec.ts:28:2 › one line awards only glasshouse and flies into its destination (1.7s)
+  ✓   3 tests/browser/economy.spec.ts:28:2 › one line awards only lighthouse and flies into its destination (1.6s)
+  ✓   4 tests/browser/economy.spec.ts:28:2 › one line awards only townhouse and flies into its destination (1.6s)
+  ✓   5 tests/browser/economy.spec.ts:36:1 › combo rewards remain correct when reward flights overlap and persist after reload (2.6s)
+  ✓   6 tests/browser/economy.spec.ts:41:1 › 100 reveals the picture and enables preview-only claim without spending or unlocking a skin (2.1s)
+  ✓   7 tests/browser/economy.spec.ts:47:1 › partial masks show progress, all rarities can become ready, and excess stays in reserve (849ms)
+  ✓   8 tests/browser/economy.spec.ts:54:1 › mobile offscreen destination receives a visible thumbnail without scrolling the board (2.0s)
+  ✓   9 tests/browser/economy.spec.ts:59:1 › reduced motion credits immediately without flying tokens; malformed save remains playable (530ms)
+  ✓  10 tests/browser/game.spec.ts:4:1 › desktop: select, preview, clear, invalid placement, drag, themes and rules (2.9s)
+  ✓  11 tests/browser/game.spec.ts:12:1 › mobile touch: tap placement and drag, no overflow, three collection cards (2.3s)
+  ✓  12 tests/browser/game.spec.ts:17:1 › 320px and reduced motion (488ms)
+  ✓  13 tests/browser/game.spec.ts:18:1 › continues past 18 placements without a result dialog or field title (4.3s)
+  ✓  14 tests/browser/game.spec.ts:24:1 › no legal remaining pieces opens the blocked result (1.4s)
+  ✓  15 tests/browser/game.spec.ts:42:1 › invalid hover draws nothing; valid hover remains visible (605ms)
+  ✓  16 tests/browser/game.spec.ts:48:1 › clear wave visibly starts at last placement and reaches the far edge later (750ms)
+
+  16 passed (29.1s)

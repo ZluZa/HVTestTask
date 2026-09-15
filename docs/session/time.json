@@ -1,0 +1,6 @@
+{
+  "startedAt": "2026-09-15T20:23:37Z",
+  "timezone": "Europe/Moscow",
+  "budgetMinutesAcrossThreePrompts": 60,
+  "note": "Real clock reading at the beginning of work. End times are appended to events.jsonl; waiting between user prompts is excluded from active work."
+}

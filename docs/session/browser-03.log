@@ -1,0 +1,35 @@
+$ playwright test -g 'complete 18|no legal remaining'
+
+Running 2 tests using 1 worker
+
+(node:40170) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/game.spec.ts:17:1 › complete 18 moves and start another game (4.3s)
+  ✘  2 tests/browser/game.spec.ts:23:1 › no legal remaining pieces opens the blocked result (4.1s)
+
+
+  1) tests/browser/game.spec.ts:23:1 › no legal remaining pieces opens the blocked result ──────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "blocked"
+    Received: "complete"
+
+      28 |   expect(next).not.toBeNull();const{slot,x,y}=next!;model=place(model,slot,x,y,()=>.999)!.state;await page.locator(`[data-slot="${slot}"]`).click();const p=await cell(page,x,y);await page.mouse.click(p.x,p.y);await expect(page.locator('#moves')).toHaveText(String(model.moves));await page.waitForTimeout(140);
+      29 |  }
+    > 30 |  expect(model.status).toBe('blocked');await expect(page.locator('#result')).toBeVisible();await expect(page.locator('#result-copy')).toContainText('нет места');
+         |                       ^
+      31 | });
+      32 |
+        at /Users/b.konnov/Documents/GIT/HVTestTask/tests/browser/game.spec.ts:30:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/game-no-legal-remaining-pieces-opens-the-blocked-result/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/game-no-legal-remaining-pieces-opens-the-blocked-result/error-context.md
+
+  1 failed
+    tests/browser/game.spec.ts:23:1 › no legal remaining pieces opens the blocked result ───────────
+  1 passed (9.8s)
+[ELIFECYCLE] Command failed with exit code 1.

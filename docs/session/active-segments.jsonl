@@ -1,0 +1,4 @@
+{"stage":1,"startedAt":"2026-09-15T20:23:37.000Z","endedAt":"2026-09-15T20:41:28.725Z","activeSeconds":1072,"remainingSeconds":2528}
+{"stage":2,"startedAt":"2026-09-15T20:43:33.000Z","endedAt":"2026-09-15T20:49:50.481Z","activeSeconds":378,"totalActiveSeconds":1450,"remainingSeconds":2150}
+{"stage":3,"startedAt":"2026-09-15T20:51:33.000Z","endedAt":"2026-09-15T21:04:18.036Z","activeSeconds":766,"totalActiveSeconds":2216,"remainingSeconds":1384}
+{"stage":4,"scope":"skins-and-chests","startedAt":"2026-09-15T21:04:38.000Z","endedAt":"2026-09-15T21:21:08.999Z","activeSeconds":991,"totalActiveSeconds":3207,"remainingSeconds":393}

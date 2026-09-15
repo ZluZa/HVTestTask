@@ -1,0 +1,9 @@
+$ playwright test -g 'clear wave visibly'
+
+Running 1 test using 1 worker
+
+(node:41000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/game.spec.ts:47:1 › clear wave visibly starts at last placement and reaches the far edge later (895ms)
+
+  1 passed (1.9s)
